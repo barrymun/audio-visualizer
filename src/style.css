@@ -40,6 +40,20 @@ html, body, .vis-cntr {
   transform: rotateZ(180deg);
 }
 
+@media screen and (max-width: 500px) {
+  #visualizer {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  #visualizer {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
 .btn-cntr {
   position: absolute;
   top: 50%;
@@ -55,6 +69,20 @@ html, body, .vis-cntr {
   align-items: center;
 }
 
+@media screen and (max-width: 500px) {
+  .btn-cntr {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .btn-cntr {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
 #play {
   border: none;
   width: 12rem;
@@ -63,6 +91,20 @@ html, body, .vis-cntr {
   background-color: transparent;
   cursor: pointer;
   outline: none;
+}
+
+@media screen and (max-width: 500px) {
+  #play {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  #play {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
 .play-icon, .pause-icon {
@@ -81,6 +123,20 @@ html, body, .vis-cntr {
   width: 5rem;
   height: 5rem;
   stroke-width: 0.08rem;
+}
+
+@media screen and (max-width: 500px) {
+  #play .icon-tabler {
+    width: calc(5rem / 3 * 2);
+    height: calc(5rem / 3 * 2);
+  }
+}
+
+@media screen and (max-width: 300px) {
+  #play .icon-tabler {
+    width: calc(5rem / 3);
+    height: calc(5rem / 3);
+  }
 }
 
 body[data-playing="false"] .play-icon {
@@ -106,3 +162,18 @@ body[data-playing="true"] .pause-icon {
   transform-origin: top left;
   transition: .25s;
 }
+
+/* TODO: */
+/*@media screen and (max-width: 500px) {*/
+/*  .visualizer-node {*/
+/*    height: 0.5rem;*/
+/*    border-radius: 0.1rem;*/
+/*  }*/
+/*}*/
+
+/*@media screen and (max-width: 300px) {*/
+/*  .visualizer-node {*/
+/*    height: 0.1rem;*/
+/*    border-radius: 0.1rem;*/
+/*  }*/
+/*}*/

@@ -41,7 +41,8 @@
       else if (val < (MAX_VALUE / 2)) val *= 1.2;
       else if (val < (MAX_VALUE / 4) * 3) val /= 1.2;
       else val /= 2;
-      spanElements[i].style.transform = `rotateZ(${i * (360 / bufferLength)}deg) translate(-50%, ${val * 0.04}rem)`;
+      // TODO: change this based on the window height (css media queries alone will not be enough)
+      spanElements[i].style.transform = `rotateZ(${i * (360 / bufferLength)}deg) translate(-50%, ${val * 0.03}rem)`;
     }
   };
   animate();
