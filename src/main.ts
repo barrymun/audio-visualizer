@@ -50,8 +50,6 @@
 
   const togglePlayPauseState = (): void => {
     let isPlaying: boolean = getIsPlaying();
-    // change the display text
-    playBtn!.innerText = isPlaying ? "Play" : "Pause";
     // toggle the playing data var
     document.body.dataset.playing = isPlaying ? "false" : "true";
   };

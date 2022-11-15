@@ -56,7 +56,41 @@ html, body, .vis-cntr {
 }
 
 #play {
+  border: none;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+}
 
+.play-icon, .pause-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  color: white;
+  opacity: 0;
+  transition: transform, opacity;
+  transition-timing-function: ease;
+  transition-duration: 300ms;
+}
+
+#play .icon-tabler {
+  width: 5rem;
+  height: 5rem;
+  stroke-width: 0.08rem;
+}
+
+body[data-playing="false"] .play-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+body[data-playing="true"] .pause-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .visualizer-node {
