@@ -1,16 +1,45 @@
 (() => {
   const audio: HTMLMediaElement = (document.getElementById('audio') as HTMLMediaElement)!;
-  const canvas: HTMLCanvasElement = (document.getElementById('canvas') as HTMLCanvasElement)!;
-  const canvasCtx: CanvasRenderingContext2D = canvas.getContext("2d")!;
+  const visualizer: HTMLDivElement = (document.getElementById('visualizer') as HTMLDivElement)!;
   const audioCtx = new AudioContext();
   const audioSrc: MediaElementAudioSourceNode = audioCtx.createMediaElementSource(audio!);
   const analyser: AnalyserNode = audioCtx.createAnalyser();
+  // analyser.fftSize = 64;
   analyser.fftSize = 128;
   analyser.smoothingTimeConstant = 0.85;
 
   // connect the source back up to the destination, otherwise the sound won't play
   audioSrc.connect(analyser);
   audioSrc.connect(audioCtx.destination);
+
+  const bufferLength: number = analyser.frequencyBinCount;
+  const dataArray: Uint8Array = new Uint8Array(bufferLength);
+
+  let spanElements: Array<HTMLSpanElement> = [];
+  for (let i: number = 0; i < bufferLength; i++) {
+    const spanElement: HTMLSpanElement = document.createElement('span');
+    spanElement.classList.add('visualizer-node');
+    spanElements.push(spanElement);
+    visualizer.appendChild(spanElement);
+  }
+
+  const clamp = (num: number, min: number, max: number): number => {
+    if (num >= max) return max;
+    if (num <= min) return min;
+    return num;
+  }
+
+  const animate = (): void => {
+    requestAnimationFrame(animate);
+    analyser.getByteFrequencyData(dataArray);
+    for (let i: number = 0; i < bufferLength; i++) {
+      let item = dataArray[i];
+      item = item > 150 ? item / 1.5 : item * 1.5;
+      spanElements[i].style.transform = `rotateZ(${i * (360 / bufferLength)}deg) translate(-50%, ${clamp(item, 100, 150)}px)`;
+      // spanElements[i].style.transform = `rotateZ(${i * (360 / bufferLength)}deg) translate(-50%, 100px)`;
+    }
+  };
+  animate();
 
   const getIsPlaying = (): boolean => document.body.dataset.playing === "true";
 
@@ -40,28 +69,6 @@
 
     togglePlayPauseState();
   });
-
-  const bufferLength: number = analyser.frequencyBinCount;
-  const dataArray: Uint8Array = new Uint8Array(bufferLength);
-  const barWidth: number = canvas.width / bufferLength;
-
-  let x: number = 0;
-  function animate(): void {
-    x = 0;
-    analyser.getByteFrequencyData(dataArray);
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i: number = 0; i < bufferLength; i++) {
-      let barHeight: number = dataArray[i] * 0.3;
-      canvasCtx.fillStyle = "white";
-      canvasCtx.rotate(i * 0.001);
-      canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-      x += barWidth;
-    }
-    canvasCtx.restore();
-    requestAnimationFrame(animate);
-  }
-  animate();
 
 })();
 

@@ -15,20 +15,62 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
+html, body, .visCntr {
   width: 100vw;
   height: 100vh;
   margin: 0;
   background-color: #242424;
 }
 
-#canvas {
+.visCntr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*filter: blur(5px) contrast(10);*/
+  mix-blend-mode: screen;
+}
+
+#visualizer {
   position: relative;
-  z-index: 1;
-  bottom: 0rem;
-  left: 0rem;
-  width: 100%;
-  height: 50vh;
-  background-color: transparent;
-  /*border: 1px solid red;*/
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  background: #fff;
+  transition: .5s;
+  transform: rotateZ(180deg);
+}
+
+.btnCntr {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12rem;
+  height: 12rem;
+  background-color: #242424;
+  border-radius: 50%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#play {
+
+}
+
+.visualizer-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border-top: 40px solid #fff;
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent;
+  transform-origin: top left;
+  transition: .25s;
 }
