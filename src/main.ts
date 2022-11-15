@@ -8,6 +8,8 @@
   const audioCtx = new AudioContext();
   const audioSrc: MediaElementAudioSourceNode = audioCtx.createMediaElementSource(audio!);
   const analyser: AnalyserNode = audioCtx.createAnalyser();
+  analyser.fftSize = 128;
+  analyser.smoothingTimeConstant = 0.85;
 
   // track.connect(analyser)
   // analyser.connect(audioCtx.destination);
@@ -43,17 +45,18 @@
     document.body.dataset.playing = isPlaying ? "false" : "true";
   });
 
-  analyser.fftSize = 128;
+
   const bufferLength: number = analyser.frequencyBinCount;
+  console.log(bufferLength)
   const dataArray: Uint8Array = new Uint8Array(bufferLength);
   const barWidth: number = canvas.width / bufferLength;
-  let x = 0;
+  let x: number = 0;
   function animate() {
     x = 0;
-    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
     analyser.getByteFrequencyData(dataArray);
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < bufferLength; i++) {
-      let barHeight = dataArray[i];
+      let barHeight = dataArray[i] * 0.5;
       canvasCtx.fillStyle = "white";
       canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
       x += barWidth;
