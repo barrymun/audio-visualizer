@@ -1,4 +1,4 @@
-let audio: HTMLAudioElement = new Audio('/public/theme.mp3');
+let audio: HTMLAudioElement = new Audio('/theme.mp3');
 
 const playBtn: HTMLElement | null = document.getElementById('play');
 playBtn!.onclick = () => {
