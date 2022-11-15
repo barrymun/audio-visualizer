@@ -15,14 +15,14 @@
   -webkit-text-size-adjust: 100%;
 }
 
-html, body, .visCntr {
+html, body, .vis-cntr {
   width: 100vw;
   height: 100vh;
   margin: 0;
   background-color: #242424;
 }
 
-.visCntr {
+.vis-cntr {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,7 +40,7 @@ html, body, .visCntr {
   transform: rotateZ(180deg);
 }
 
-.btnCntr {
+.btn-cntr {
   position: absolute;
   top: 50%;
   left: 50%;
