@@ -50,12 +50,15 @@
     x = 0;
     analyser.getByteFrequencyData(dataArray);
     canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasCtx.save();
     for (let i: number = 0; i < bufferLength; i++) {
-      let barHeight: number = dataArray[i] * 0.5;
+      let barHeight: number = dataArray[i] * 0.3;
       canvasCtx.fillStyle = "white";
+      canvasCtx.rotate(i * 0.001);
       canvasCtx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
       x += barWidth;
     }
+    canvasCtx.restore();
     requestAnimationFrame(animate);
   }
   animate();
