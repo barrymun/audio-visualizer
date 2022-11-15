@@ -20,7 +20,7 @@
   audioSrc.connect(audioCtx.destination);
 
   const bufferLength: number = analyser.frequencyBinCount;
-  let dataArray: Uint8Array = new Uint8Array(bufferLength);
+  const dataArray: Uint8Array = new Uint8Array(bufferLength);
 
   let spanElements: Array<HTMLSpanElement> = [];
   for (let i: number = 0; i < bufferLength; i++) {
@@ -40,10 +40,10 @@
     for (let i: number = 0; i < bufferLength; i++) {
       let val = dataArray[i];
       if (val < (MAX_VALUE / 4)) val *= 2;
-      else if (val < (MAX_VALUE / 2)) val *= 1.5;
-      else if (val < (MAX_VALUE / 4) * 3) val /= 1.5;
+      else if (val < (MAX_VALUE / 2)) val *= 1.2;
+      else if (val < (MAX_VALUE / 4) * 3) val /= 1.2;
       else val /= 2;
-      spanElements[i].style.transform = `rotateZ(${i * (360 / bufferLength)}deg) translate(-50%, ${val * 0.05}rem)`;
+      spanElements[i].style.transform = `rotateZ(${i * (360 / bufferLength)}deg) translate(-50%, ${val * 0.04}rem)`;
     }
   };
   animate();

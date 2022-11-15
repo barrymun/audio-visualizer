@@ -66,11 +66,9 @@ html, body, .visCntr {
   transform: translate(-50%, -50%);
   width: 1.5rem;
   height: calc(50% - 1px);
+  /*clip-path: polygon(100% 0%, 100% 100%, 0% 70%, 0% 30%);*/
   background-color: white;
   border-radius: 1rem;
-  /*border-top: 40px solid #fff;*/
-  /*border-right: 20px solid transparent;*/
-  /*border-left: 20px solid transparent;*/
   transform-origin: top left;
   transition: .25s;
 }
