@@ -6,6 +6,7 @@
 
   const audioCtx = new AudioContext();
   const audioSrc: MediaElementAudioSourceNode = audioCtx.createMediaElementSource(audio!);
+
   // const analyser: AnalyserNode = audioCtx.createAnalyser();
   // track.connect(analyser)
   // analyser.connect(audioCtx.destination);
@@ -20,10 +21,16 @@
   // track.connect(gainNode).connect(panner).connect(audioCtx.destination);
 
   // connect the source back up to the destination, otherwise the sound won't play
+  // audioSrc.connect(analyser);
   audioSrc.connect(audioCtx.destination);
 
   const playBtn: HTMLElement | null = document.getElementById('play');
   playBtn!.addEventListener("click", () => {
+
+    // check if context is in suspended state (autoplay policy)
+    // audio will not play if the context is suspended after a page reload for example
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+
     const isPlaying: boolean = document.body.dataset.playing === "true";
 
     // play/pause the music
