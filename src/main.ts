@@ -49,8 +49,8 @@
   function animate(): void {
     x = 0;
     analyser.getByteFrequencyData(dataArray);
-    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
     canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i: number = 0; i < bufferLength; i++) {
       let barHeight: number = dataArray[i] * 0.3;
       canvasCtx.fillStyle = "white";
