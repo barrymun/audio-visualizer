@@ -7,12 +7,10 @@
   const audioSrc: MediaElementAudioSourceNode = audioCtx.createMediaElementSource(audio!);
   const analyser: AnalyserNode = audioCtx.createAnalyser();
   /**
-   * w.r.t. analyser.fftSize:
+   * w.r.t. analyser.fftSize: (64, 128, 256 tested. 128 seems the most appropriate)
    * "A higher value will result in more details in the frequency domain but fewer details in the time domain."
    */
-  analyser.fftSize = 64;
-  // analyser.fftSize = 128;
-  // analyser.fftSize = 256;
+  analyser.fftSize = 128;
   analyser.smoothingTimeConstant = 0.85;
 
   // connect the source back up to the destination, otherwise the sound won't play
